@@ -57,9 +57,19 @@ const Spotify = {
     ).then(response => response.json()
     ).then(jsonResponse => {
       userID = jsonResponse.id; 
-    }); 
-
-    let playlistID = fetch(`https://api.spotify.com/v1/users/${userID}/playlists`)
+      return fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+        headers: headers, 
+        method: 'POST',
+        body: JSON.stringify({name: playlistName, description:'My playlist from Jammming', public: true})})
+    }).then(response => response.json()
+    ).then(jsonResponse => {
+      let playlistID = jsonResponse.id;
+      return fetch(`https://api.spotify.com/v1/playlists/${playlistID}/tracks`, {
+        headers: headers,
+        method: 'POST',
+        body: JSON.stringify({uris: playlistURIs})}
+      )
+    }).then(alert('Playlist Saved'))
   }
 }
  
