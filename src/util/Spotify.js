@@ -1,5 +1,5 @@
 const clientId = '36618c14c36144e18e85d49521943e64';
-const redirectURI = 'https://music-selection.surge.sh';
+const redirectURI = 'https://localhost:3000';
 let accessToken;
 
 const Spotify = {
